@@ -1,0 +1,53 @@
+source /opt/netbox/venv/bin/activate
+
+pip install netbox-devicetype-importer
+
+echo netbox-devicetype-importer >> /opt/netbox/local_requirements.txt
+
+-----------------------------------------------
+
+nano /opt/netbox/local_requirements.txt
+
+-----------------------------------------------
+
+nepalm
+netbox-qrcode
+netbox-topology-views
+netbox-plugin-extensions
+netbox-secretstore
+netbox-devicetepe-importer
+
+
+----------------------------------------------
+nano /opt/netbox/netbox/netbox/configuration.py
+
+-------------------------------------------------
+
+
+PLUGINS_CONFIG = {
+    'netbox_devicetype_importer': {
+        'github_token': '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'
+    }
+}
+
+
+
+-----------------------------------------------
+
+python3 manage.py migrate
+-----------------------------------------------
+
+systemctl restart netbox netbox-rq
+
+systemctl status netbox netbox-rq
+
+
+
+
+-----------------------------------------------
+
+PLUGINS = ['netbox_devicetype_importer']
+
+
+
+
